@@ -1,0 +1,65 @@
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions
+from selenium.webdriver.support.wait import WebDriverWait
+import allure
+
+class HomePageScooter:
+
+    COOKIE_ACCEPT_BUTTON = [By.ID, 'rcc-confirm-button']
+    
+
+    QUESTIONS = [        
+        (By.ID, "accordion__heading-0"),
+        (By.ID, "accordion__heading-1"),
+        (By.ID, "accordion__heading-2"),
+        (By.ID, "accordion__heading-3"),
+        (By.ID, "accordion__heading-4"),
+        (By.ID, "accordion__heading-5"),
+        (By.ID, "accordion__heading-6"),
+        (By.ID, "accordion__heading-7")
+        ]
+    ANSWERS = [
+        (By.ID, "accordion__panel-0"),
+        (By.ID, "accordion__panel-1"),
+        (By.ID, "accordion__panel-2"),
+        (By.ID, "accordion__panel-3"),
+        (By.ID, "accordion__panel-4"),
+        (By.ID, "accordion__panel-5"),
+        (By.ID, "accordion__panel-6"),
+        (By.ID, "accordion__panel-7")
+    ]
+
+    ORDER_BUTTON_HEADER = [By.XPATH, "//div[contains(@class, 'Header_Nav')]//button[text()='Заказать']"]
+    ORDER_BUTTON_BOTTOM = [By.XPATH, "//div[contains(@class, 'Home_FinishButton')]//button[text()='Заказать']"]
+
+    @allure.step('Открываем страницу')
+    def __init__(self, driver):
+        self.driver = driver
+ 
+    @allure.step('Принимаем куки')
+    def accept_cookies(self):
+        self.driver.find_element(*self.COOKIE_ACCEPT_BUTTON).click()
+
+    @allure.step("Ждем прогрузки станицы")
+    def wait_for_load_home_page(self):
+        WebDriverWait(self.driver, 3).until(expected_conditions.visibility_of_element_located(self.QUESTIONS[0]))
+
+    @allure.step("Нажать на вопрос")    
+    def click_question(self, index):
+        question = self.driver.find_element(*self.QUESTIONS[index])
+        self.driver.execute_script("arguments[0].scrollIntoView();",question)
+        question.click()
+        
+    @allure.step("Ждем появления ответа")
+    def wait_for_answer(self,index):
+        WebDriverWait(self.driver, 3).until(expected_conditions.visibility_of_element_located(self.ANSWERS[index]))
+
+    @allure.step("Получить текст ответа")
+    def get_answer_text(self, index):
+        return self.driver.find_element(*self.ANSWERS[index]).text
+
+    @allure.step("Нажать кнопку заказать")
+    def click_order_button(self,order_button):
+        button = self.driver.find_element(*order_button)
+        self.driver.execute_script("arguments[0].scrollIntoView();",button)
+        button.click()
