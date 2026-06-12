@@ -2,6 +2,7 @@ import pytest
 from pages.home_page import HomePageScooter
 
 
+
 class TestFAQ:
 
     @pytest.mark.parametrize('index, expected_text', 

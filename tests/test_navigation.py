@@ -4,7 +4,6 @@ from pages.home_page import HomePageScooter
 from pages.order_page import OrderPageScooter
 
 
-
 class TestNavigation:
         
     def test_click_scooter_logo_open_home_page(self, driver):
