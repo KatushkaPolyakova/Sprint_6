@@ -11,11 +11,13 @@ class TestFAQ:
                             )
     
     def test_click_question_get_correct_answer(self, driver, index, expected_text):
-        driver.get(BASE_URL)
-
         home_page= HomePageScooter(driver)
+
+        home_page.open(BASE_URL)
+
         home_page.accept_cookies()
         home_page.wait_for_load_home_page()
+        
         home_page.click_question(index)
         home_page.wait_for_answer(index)
 

@@ -19,22 +19,25 @@ class TestOrder:
 
 
     def test_order_is_sucсess(self, driver, order_button, name, lastname, address, station, phone, date, last, color, comment):
-        
-        driver.get(BASE_URL)
-
+    
         home_page = HomePageScooter (driver)
         order_page = OrderPageScooter(driver)
         rent_page = OrderProRentPageScooter(driver)
 
+        home_page.open(BASE_URL)
+
         home_page.accept_cookies()
         home_page.wait_for_load_home_page()
         home_page.click_order_button(order_button)
+
         order_page.wait_for_order_page()
         order_page.full_order(name, lastname, address, station, phone)
         order_page.click_next_button()
+
         rent_page.wait_for_rent_page()
         rent_page.fill_rent(date, last, color, comment)
         rent_page.click_order_button()
+        
         rent_page.click_order_yes()
         rent_page.wait_for_success()
     

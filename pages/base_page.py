@@ -9,6 +9,9 @@ class BasePage:
     def __init__(self, driver):
         self.driver = driver
 
+    def open(self, url):
+        self.driver.get(url)
+
     def click(self, locator):
         self.driver.find_element(*locator).click()
 
@@ -29,4 +32,14 @@ class BasePage:
     def scroll_to_element(self, locator):
         element = self.driver.find_element(*locator)
         self.driver.execute_script("arguments[0].scrollIntoView();",element)
+        
+    def get_current_url(self):
+        return self.driver.current_url
+    
+    def wait_new_window(self):
+        WebDriverWait(self.driver, 10).until(lambda d: len(d.window_handles) == 2)
+
+    def switch_to_new_window(self):
+        self.wait_new_window()
+        self.driver.swith_to.window(self.driver.window_handles[1])
         
