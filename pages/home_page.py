@@ -1,9 +1,10 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
+from pages.base_page import BasePage
 import allure
 
-class HomePageScooter:
+class HomePageScooter(BasePage):
 
     COOKIE_ACCEPT_BUTTON = [By.ID, 'rcc-confirm-button']
     

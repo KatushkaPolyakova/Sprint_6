@@ -1,9 +1,11 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
+from pages.base_page import BasePage
 import allure
 
-class OrderProRentPageScooter:
+
+class OrderProRentPageScooter(BasePage):
     DATE = [By.XPATH, "//input[@placeholder='* Когда привезти самокат']"]
     LAST = [By.XPATH, "//div[contains(@class, 'Dropdown-placeholder')]"]
     COLOR_BLACK = [By.ID, "black"]

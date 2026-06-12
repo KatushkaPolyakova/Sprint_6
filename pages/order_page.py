@@ -1,9 +1,10 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
+from pages.base_page import BasePage
 import allure
 
-class OrderPageScooter:
+class OrderPageScooter(BasePage):
     YANDEX_BUTTON = [By.XPATH, "//a[contains(@class, 'Header_LogoYandex')]"]
     SCOOTER_BUTTON = [By.XPATH, "//a[contains(@class, 'Header_LogoScooter')]"]
 
