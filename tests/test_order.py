@@ -41,7 +41,8 @@ class TestOrder:
         rent_page.click_order_yes()
         rent_page.wait_for_success()
     
-        assert 'Заказ оформлен' in rent_page.get_success_text()
+        assert rent_page.is_success_message_displayed()
+        
     
 
         

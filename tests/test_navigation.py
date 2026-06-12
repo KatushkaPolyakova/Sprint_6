@@ -1,4 +1,3 @@
-
 from pages.home_page import HomePageScooter
 from pages.order_page import OrderPageScooter
 from data.constants import BASE_URL, DZEN_URL

@@ -60,8 +60,9 @@ class OrderProRentPageScooter(BasePage):
     def wait_for_success(self):
         self.wait_visibility(SUCCESS_WINDOW)
 
-    @allure.step("Получить текст с экрана")
-    def get_success_text(self):
-        return self.get_text(SUCCESS_MESSAGE)
+    
+    @allure.step("Проверить отображение окна")
+    def is_success_message_displayed(self):
+        return self.is_displayed(SUCCESS_MESSAGE)
 
     
