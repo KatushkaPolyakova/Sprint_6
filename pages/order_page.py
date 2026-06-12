@@ -18,38 +18,38 @@ class OrderPageScooter(BasePage):
 
     @allure.step('Открыть сайт')
     def __init__(self, driver):
-        self.driver = driver
+        super().__init__(driver)
 
     @allure.step("Ждем загрузки станицы")
     def wait_for_order_page(self):
-        WebDriverWait(self.driver, 3).until(expected_conditions.visibility_of_element_located(self.NAME))
+        self.wait_visibility(self.NAME)
     
     @allure.step("Вводим имя")
     def input_name(self, name):
-        self.driver.find_element(*self.NAME).send_keys(name)
+        self.send_keys(self.NAME, name)
     
     @allure.step("Вводим фамилию")
     def input_lastname(self, lastname):
-        self.driver.find_element(*self.LASTNAME).send_keys(lastname)
+        self.send_keys(self.LASTNAME, lastname)
 
     @allure.step("Ввод адреса")
     def input_address(self, address):
-        self.driver.find_element(*self.ADDRESS).send_keys(address)
+        self.send_keys(self.ADDRESS, address)
 
     @allure.step("Выбор метро")
     def choose_metro(self, station):
-        self.driver.find_element(*self.METRO).click()
+        self.click(self.METRO)
         metro_station = (By.XPATH,f"//div[contains(@class,'select-search')]//*[contains(text(),'{station}')]")
         WebDriverWait(self.driver, 3).until(expected_conditions.element_to_be_clickable(metro_station))
-        self.driver.find_element(*metro_station).click()
+        self.click(metro_station)
     
     @allure.step("Ввод телефона")
     def input_phone(self, phone):
-        self.driver.find_element(*self.PHONE).send_keys(phone)
+        self.send_keys(self.PHONE, phone)
 
     @allure.step("Нажать далее")
     def click_next_button(self):
-        self.driver.find_element(*self.NEXT_BUTTON).click()
+        self.click(self.NEXT_BUTTON)
 
     @allure.step("Заполение формы заказа")
     def full_order (self, name, lastname, address, station, phone):
@@ -61,9 +61,9 @@ class OrderPageScooter(BasePage):
 
     @allure.step("Нажать на лого Самокат")
     def click_scooter(self):
-        self.driver.find_element(*self.SCOOTER_BUTTON).click()
+        self.click(self.SCOOTER_BUTTON)
 
     @allure.step("Нажать на лого Яндекс")
     def click_yandex(self):
-        self.driver.find_element(*self.YANDEX_BUTTON).click()
+        self.click(self.YANDEX_BUTTON)
     

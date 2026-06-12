@@ -23,40 +23,40 @@ class OrderProRentPageScooter(BasePage):
 
     @allure.step("Открыть страницу")
     def __init__(self, driver):
-        self.driver = driver
+        super().__init__(driver)
 
     @allure.step("Ждем загрузки страницы")
     def wait_for_rent_page(self):
-        WebDriverWait(self.driver, 3).until(expected_conditions.visibility_of_element_located(self.DATE))
+        self.wait_visibility(self.DATE)
 
     @allure.step("Выбрать дату")
     def choose_date(self, date):
-        self.driver.find_element(*self.DATE).click()
+        self.click(self.DATE)
         date = (By.XPATH, f"//div[contains(@class,'react-datepicker__day') and text()='{date}']")
         WebDriverWait(self.driver, 3).until(expected_conditions.element_to_be_clickable(date))
-        self.driver.find_element(*date).click()
+        self.click(date)
 
     @allure.step("Выбрать период")
     def choose_last(self, last):
-        self.driver.find_element(*self.LAST).click()
+        self.click(self.LAST)
         last = (By.XPATH, f"//div[@class='Dropdown-option' and text()='{last}']")
         WebDriverWait(self.driver, 3).until(expected_conditions.element_to_be_clickable(last))
-        self.driver.find_element(*last).click()
+        self.click(last)
     
     @allure.step("Выбрать цвет")
     def choose_color(self, color):
         if color == 'black':
-            self.driver.find_element(*self.COLOR_BLACK).click()
+            self.click(self.COLOR_BLACK)
         elif color == 'grey':
-            self.driver.find_element(*self.COLOR_GREY).click()
+            self.click(self.COLOR_GREY)
  
-    @allure.step("Ввод коментарция")
+    @allure.step("Ввод комментария")
     def input_comment(self,comment):
-        self.driver.find_element(*self.COMMENT).send_keys(comment)
+        self.send_keys(self.COMMENT, comment)
     
     @allure.step("Нажать заказать")
     def click_order_button(self):
-        self.driver.find_element(*self.ORDER_BUTTON).click()
+        self.click(self.ORDER_BUTTON)
 
     @allure.step("Заполение формы заказа")
     def fill_rent(self, date, last, color, comment):
@@ -67,15 +67,14 @@ class OrderProRentPageScooter(BasePage):
 
     @allure.step("Нажать Да")
     def click_order_yes(self):
-        self.driver.find_element(*self.ORDER_YES).click()
-
+        self.click(self.ORDER_YES)
 
     @allure.step("Подождать загрузки страницы")
     def wait_for_success(self):
-        WebDriverWait(self.driver, 3).until(expected_conditions.visibility_of_element_located(self.SUCCESS_WINDOW))
+        self.wait_visibility(self.SUCCESS_WINDOW)
 
     @allure.step("Получить текст с экрана")
     def get_success_text(self):
-        return self.driver.find_element(*self.SUCCESS_MESSAGE).text
+        return self.get_text(self.SUCCESS_MESSAGE)
 
     

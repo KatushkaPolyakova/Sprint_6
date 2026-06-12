@@ -35,32 +35,31 @@ class HomePageScooter(BasePage):
 
     @allure.step('Открываем страницу')
     def __init__(self, driver):
-        self.driver = driver
+        super().__init__(driver)
  
     @allure.step('Принимаем куки')
     def accept_cookies(self):
-        self.driver.find_element(*self.COOKIE_ACCEPT_BUTTON).click()
+        self.click(self.COOKIE_ACCEPT_BUTTON)
 
     @allure.step("Ждем прогрузки станицы")
     def wait_for_load_home_page(self):
-        WebDriverWait(self.driver, 3).until(expected_conditions.visibility_of_element_located(self.QUESTIONS[0]))
+        self.wait_visibility(self.QUESTIONS)
 
     @allure.step("Нажать на вопрос")    
     def click_question(self, index):
-        question = self.driver.find_element(*self.QUESTIONS[index])
-        self.driver.execute_script("arguments[0].scrollIntoView();",question)
-        question.click()
+        self.scroll_to_element(self.QUESTIONS[index])
+        self.click(self.QUESTIONS[index])
         
     @allure.step("Ждем появления ответа")
     def wait_for_answer(self,index):
-        WebDriverWait(self.driver, 3).until(expected_conditions.visibility_of_element_located(self.ANSWERS[index]))
+        self.wait_visibility(self.ANSWERS[index])
 
     @allure.step("Получить текст ответа")
     def get_answer_text(self, index):
-        return self.driver.find_element(*self.ANSWERS[index]).text
+        return self.get_answer_text(self.ANSWERS[index])
 
     @allure.step("Нажать кнопку заказать")
     def click_order_button(self,order_button):
-        button = self.driver.find_element(*order_button)
-        self.driver.execute_script("arguments[0].scrollIntoView();",button)
-        button.click()
+        self.scroll_to_element(order_button)
+        self.click(order_button)
+        
