@@ -4,6 +4,7 @@ from pages.order_page import OrderPageScooter
 from pages.order_pro_rent import OrderProRentPageScooter
 from data.data_order import ORDER_DATA_1, ORDER_DATA_2
 from locators.locators_home import ORDER_BUTTON_BOTTOM, ORDER_BUTTON_HEADER
+from data.constants import BASE_URL
 
 
 class TestOrder:
@@ -19,7 +20,7 @@ class TestOrder:
 
     def test_order_is_sucсess(self, driver, order_button, name, lastname, address, station, phone, date, last, color, comment):
         
-        driver.get('https://qa-scooter.education-services.ru/')
+        driver.get(BASE_URL)
 
         home_page = HomePageScooter (driver)
         order_page = OrderPageScooter(driver)

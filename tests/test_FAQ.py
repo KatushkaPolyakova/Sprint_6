@@ -1,7 +1,7 @@
 import pytest
 from pages.home_page import HomePageScooter
 from data.data_FAQ import FAQ_DATA
-
+from data.constants import BASE_URL
 
 
 class TestFAQ:
@@ -11,7 +11,7 @@ class TestFAQ:
                             )
     
     def test_click_question_get_correct_answer(self, driver, index, expected_text):
-        driver.get('https://qa-scooter.education-services.ru/')
+        driver.get(BASE_URL)
 
         home_page= HomePageScooter(driver)
         home_page.accept_cookies()
