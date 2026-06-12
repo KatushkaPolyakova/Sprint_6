@@ -2,6 +2,8 @@ import pytest
 from pages.home_page import HomePageScooter
 from pages.order_page import OrderPageScooter
 from pages.order_pro_rent import OrderProRentPageScooter
+from data.data_order import ORDER_DATA_1, ORDER_DATA_2
+from locators.locators_home import ORDER_BUTTON_BOTTOM, ORDER_BUTTON_HEADER
 
 
 class TestOrder:
@@ -9,18 +11,8 @@ class TestOrder:
     @pytest.mark.parametrize(
         'order_button, name, lastname, address, station, phone, date, last, color, comment',
         [
-            (
-                HomePageScooter.ORDER_BUTTON_HEADER,
-                'Олег', 'Зайцев', 'Бухвостова, 12',
-                'Сокольники', '89111111111',
-                '29', 'четверо суток', 'black', 'скорее скорее'
-            ),
-            (
-                HomePageScooter.ORDER_BUTTON_BOTTOM,
-                'Рома', 'Киров', 'Площадь Восстания, 1',
-                'Охотный ряд', '89222222222',
-                '1', 'сутки', 'grey', 'надо еще вчера'
-            )
+             (ORDER_BUTTON_HEADER, *ORDER_DATA_1),
+             (ORDER_BUTTON_BOTTOM, *ORDER_DATA_2)
         ]
     )
 
