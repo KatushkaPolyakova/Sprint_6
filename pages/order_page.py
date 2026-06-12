@@ -63,6 +63,6 @@ class OrderPageScooter(BasePage):
      
     @allure.step("Переход в Дзен через логотип Яндекс")
     def open_dzen_by_yandex_logo(self):
-    self.click_yandex()
-    self.switch_to_new_window()
+        self.click_yandex()
+        self.switch_to_new_window()
 

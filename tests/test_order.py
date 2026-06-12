@@ -5,10 +5,11 @@ from pages.order_pro_rent import OrderProRentPageScooter
 from data.data_order import ORDER_DATA_1, ORDER_DATA_2
 from locators.locators_home import ORDER_BUTTON_BOTTOM, ORDER_BUTTON_HEADER
 from data.constants import BASE_URL
+import allure
 
 
 class TestOrder:
-
+    @allure.title("Успешное оформление заказа через верх и нижнюю кнопки")
     @pytest.mark.parametrize(
         'order_button, name, lastname, address, station, phone, date, last, color, comment',
         [
@@ -16,7 +17,6 @@ class TestOrder:
              (ORDER_BUTTON_BOTTOM, *ORDER_DATA_2)
         ]
     )
-
 
     def test_order_is_sucсess(self, driver, order_button, name, lastname, address, station, phone, date, last, color, comment):
     
@@ -37,7 +37,7 @@ class TestOrder:
         rent_page.wait_for_rent_page()
         rent_page.fill_rent(date, last, color, comment)
         rent_page.click_order_button()
-        
+
         rent_page.click_order_yes()
         rent_page.wait_for_success()
     

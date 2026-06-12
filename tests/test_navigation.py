@@ -3,10 +3,11 @@ from pages.home_page import HomePageScooter
 from pages.order_page import OrderPageScooter
 from data.constants import BASE_URL, DZEN_URL
 from locators.locators_home import ORDER_BUTTON_HEADER
+import allure
 
 
 class TestNavigation:
-        
+    @allure.title("Клик на лого скутера, переход на домашнюю станицу")    
     def test_click_scooter_logo_open_home_page(self, driver):
             home_page = HomePageScooter(driver)
             order_page = OrderPageScooter(driver)
@@ -22,6 +23,7 @@ class TestNavigation:
             assert order_page.get_current_url() == BASE_URL
         
 
+    @allure.title("Клик на лого яндекса, переход на станицу дзена")
     def test_click_yandex_logo_open_dzen(self, driver):
             home_page = HomePageScooter(driver)
             order_page = OrderPageScooter(driver)
