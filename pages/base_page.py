@@ -24,9 +24,7 @@ class BasePage:
 
     @allure.step("Подождать загрузку элемента")
     def wait_visibility(self, locator):
-        WebDriverWait(self.driver, 10).until(
-            EC.visibility_of_element_located(locator)
-        )
+        WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(locator))
 
     @allure.step("Получить текст элемента")
     def get_text(self, locator):
@@ -53,3 +51,4 @@ class BasePage:
     def switch_to_new_window(self):
         self.wait_new_window()
         self.driver.swith_to.window(self.driver.window_handles[1])
+

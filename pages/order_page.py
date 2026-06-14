@@ -7,7 +7,6 @@ from locators.locators_base import *
 import allure
 
 
-
 class OrderPageScooter(BasePage):
 
     @allure.step('Открыть сайт')
@@ -33,9 +32,8 @@ class OrderPageScooter(BasePage):
     @allure.step("Выбор метро")
     def choose_metro(self, station):
         self.click(METRO)
-        metro_station = (By.XPATH,f"//div[contains(@class,'select-search')]//*[contains(text(),'{station}')]")
-        WebDriverWait(self.driver, 3).until(expected_conditions.element_to_be_clickable(metro_station))
-        self.click(metro_station)
+        self.wait_visibility(metro_station(station))
+        self.click(metro_station(station))
     
     @allure.step("Ввод телефона")
     def input_phone(self, phone):

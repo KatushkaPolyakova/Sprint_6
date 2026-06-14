@@ -4,6 +4,7 @@ from data.data_FAQ import FAQ_DATA
 from data.constants import BASE_URL
 import allure
 
+
 class TestFAQ:
     @allure.title("Проверка текеста ответа ")
     @pytest.mark.parametrize('index, expected_text', 

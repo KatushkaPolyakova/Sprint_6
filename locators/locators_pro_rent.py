@@ -2,7 +2,13 @@ from selenium.webdriver.common.by import By
 
 
 DATE = (By.XPATH, "//input[@placeholder='* Когда привезти самокат']")
+def date_locatirs(date):
+    return (By.XPATH, f"//div[contains(@class,'react-datepicker__day') and text()='{date}']") 
+
 LAST = (By.XPATH, "//div[contains(@class, 'Dropdown-placeholder')]")
+def rental_period (last):
+    return (By.XPATH, f"//div[@class='Dropdown-option' and text()='{last}']")
+
 COLOR_BLACK = (By.ID, "black")
 COLOR_GREY = (By.ID, "grey")
 COMMENT = (By.XPATH, "//input[@placeholder='Комментарий для курьера']")

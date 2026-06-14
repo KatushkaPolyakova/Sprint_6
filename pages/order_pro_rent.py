@@ -19,16 +19,13 @@ class OrderProRentPageScooter(BasePage):
     @allure.step("Выбрать дату")
     def choose_date(self, date):
         self.click(DATE)
-        date = (By.XPATH, f"//div[contains(@class,'react-datepicker__day') and text()='{date}']")
-        WebDriverWait(self.driver, 3).until(expected_conditions.element_to_be_clickable(date))
-        self.click(date)
+        self.click(date_locatirs(date))
 
     @allure.step("Выбрать период")
     def choose_last(self, last):
         self.click(LAST)
-        last = (By.XPATH, f"//div[@class='Dropdown-option' and text()='{last}']")
-        WebDriverWait(self.driver, 3).until(expected_conditions.element_to_be_clickable(last))
-        self.click(last)
+        self.wait_visibility(rental_period(last))
+        self.click(rental_period(last))
     
     @allure.step("Выбрать цвет")
     def choose_color(self, color):
